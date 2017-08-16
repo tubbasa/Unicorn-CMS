@@ -1,0 +1,12 @@
+c:\users\tubapc\documents\visual studio 2015\Projects\HaberSis\HaberSis.Core\bin\Debug\HaberSis.Core.dll
+c:\users\tubapc\documents\visual studio 2015\Projects\HaberSis\HaberSis.Core\bin\Debug\HaberSis.Core.pdb
+c:\users\tubapc\documents\visual studio 2015\Projects\HaberSis\HaberSis.Core\obj\Debug\HaberSis.Core.csprojResolveAssemblyReference.cache
+c:\users\tubapc\documents\visual studio 2015\Projects\HaberSis\HaberSis.Core\obj\Debug\HaberSis.Core.dll
+c:\users\tubapc\documents\visual studio 2015\Projects\HaberSis\HaberSis.Core\obj\Debug\HaberSis.Core.pdb
+C:\Users\TubaPC\Documents\Visual Studio 2015\Projects\HaberSis\HaberSis.Core\bin\Debug\HaberSis.Core.dll.config
+C:\Users\TubaPC\Documents\Visual Studio 2015\Projects\HaberSis\HaberSis.Core\bin\Debug\EntityFramework.dll
+C:\Users\TubaPC\Documents\Visual Studio 2015\Projects\HaberSis\HaberSis.Core\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\TubaPC\Documents\Visual Studio 2015\Projects\HaberSis\HaberSis.Core\bin\Debug\HaberSis.Data.dll
+C:\Users\TubaPC\Documents\Visual Studio 2015\Projects\HaberSis\HaberSis.Core\bin\Debug\HaberSis.Data.pdb
+C:\Users\TubaPC\Documents\Visual Studio 2015\Projects\HaberSis\HaberSis.Core\bin\Debug\EntityFramework.xml
+C:\Users\TubaPC\Documents\Visual Studio 2015\Projects\HaberSis\HaberSis.Core\bin\Debug\EntityFramework.SqlServer.xml

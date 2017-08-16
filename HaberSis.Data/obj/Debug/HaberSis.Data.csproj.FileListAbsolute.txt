@@ -1,0 +1,15 @@
+c:\users\tubapc\documents\visual studio 2015\Projects\HaberSis\HaberSis.Data\obj\Debug\HaberSis.Data.csprojResolveAssemblyReference.cache
+c:\users\tubapc\documents\visual studio 2015\Projects\HaberSis\HaberSis.Data\bin\Debug\HaberSis.Data.dll.config
+c:\users\tubapc\documents\visual studio 2015\Projects\HaberSis\HaberSis.Data\bin\Debug\HaberSis.Data.dll
+c:\users\tubapc\documents\visual studio 2015\Projects\HaberSis\HaberSis.Data\bin\Debug\HaberSis.Data.pdb
+c:\users\tubapc\documents\visual studio 2015\Projects\HaberSis\HaberSis.Data\bin\Debug\EntityFramework.dll
+c:\users\tubapc\documents\visual studio 2015\Projects\HaberSis\HaberSis.Data\bin\Debug\EntityFramework.SqlServer.dll
+c:\users\tubapc\documents\visual studio 2015\Projects\HaberSis\HaberSis.Data\bin\Debug\EntityFramework.xml
+c:\users\tubapc\documents\visual studio 2015\Projects\HaberSis\HaberSis.Data\bin\Debug\EntityFramework.SqlServer.xml
+c:\users\tubapc\documents\visual studio 2015\Projects\HaberSis\HaberSis.Data\obj\Debug\HaberSis.Data.dll
+c:\users\tubapc\documents\visual studio 2015\Projects\HaberSis\HaberSis.Data\obj\Debug\HaberSis.Data.pdb
+C:\Users\TubaPC\Documents\Visual Studio 2015\Projects\HaberSis\HaberSis.Data\bin\Debug\PagedList.dll
+C:\Users\TubaPC\Documents\Visual Studio 2015\Projects\HaberSis\HaberSis.Data\bin\Debug\PagedList.xml
+C:\Users\TubaPC\Documents\Visual Studio 2015\Projects\HaberSis\HaberSis.Data\obj\Debug\HaberSis.Data.Migrations.Olustur.resources
+C:\Users\TubaPC\Documents\Visual Studio 2015\Projects\HaberSis\HaberSis.Data\obj\Debug\HaberSis.Data.csproj.GenerateResource.Cache
+C:\Users\TubaPC\Documents\Visual Studio 2015\Projects\HaberSis\HaberSis.Data\obj\Debug\HaberSis.Data.Migrations.Olustur1.resources
