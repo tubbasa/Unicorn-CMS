@@ -13,6 +13,7 @@ using System.Text;
 
 namespace HaberSis.Admin.Controllers
 {
+    //deneme
     public class HaberController : Controller
     {
         #region ctor
