@@ -1,0 +1,79 @@
+﻿@model HaberSis.Data.Model.MenuLabel
+@{
+    ViewBag.Title = "MenuLabelDuzenle";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <!-- Basic form -->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <header class="panel-heading">@ViewBag.Title</header>
+                <div class="panel-body">
+                    @using (Html.BeginForm("MenuLabelDuzenle", "Menu", FormMethod.Post, new { id = "MenuLabelDuzenleForm" }))
+                    {
+
+
+                        @*<div class="form-group">
+                                <label for="exampleInputEmail1">Üst Kategori Adı</label>
+                                @Html.DropDownListFor(model => model.Kategori.KategoriAdi, new SelectList(ViewBag.Kategori, "ID", "KategoriAdi"), ("Seçiniz"), new { @class = "form-control", id = "ParentID" })
+                            </div>*@
+                        @*<div class="form-group">
+                                <label for="exampleInputEmail1">Haber Başlığı</label>
+                                <input type="text" class="form-control" id="haberBaslik" placeholder="Haber Başlığı">
+                            </div>*@
+
+
+                        <div class="form-group">
+                            <label for="Baslik">Menu label Adı</label>
+                            @Html.TextBoxFor(x => x.Ad, new { @class = "form-control", id = "Baslik", placeholder = "Tip Adı" })
+                        </div>
+
+                        <div class="form-group">
+                            <label for="Baslik">Menu label Açıklaması</label>
+                            @Html.TextBoxFor(x => x.Aciklama, new { @class = "form-control", id = "Baslik", placeholder = "Tip Adı" })
+                        </div>
+
+                        <div class="checkbox">
+                            <label>
+                                @Html.CheckBoxFor(x => x.AktifMi)<span>Aktif mi?</span>
+                            </label>
+                        </div>
+                        @*<a href="#" class="btn btn-default" onclick="HaberEkle()">Kaydet</a>*@
+                        <button type="submit" class="btn btn-default" id="MenuLabelDuzenleBtn">Kaydet</button>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    $(document).ready(function ()
+    {
+        $(document).on("click", "#MenuLabelDuzenleBtn ", function ()
+        {
+            $("#MenuLabelDuzenleForm").ajaxForm(
+                {
+                    success: function (response) {
+                        if (response.Success) {
+                            bootbox.alert(response.Message, function () {
+                                @*location.href(@Url.Action("MenuTipListele","Menu"));*@
+                            });
+                        }
+                        else {
+                            bootbox.alert(response.Message, function () { });
+                        }
+                    }
+
+                })
+
+        })
+    })
+</script>
+
+
+

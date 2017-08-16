@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+  
+ @Html.Partial("~/Views/ThePrint/Head.cshtml")
+  
+</head>
+<body class="home blog">
+    <div id="container" class="gp-theprint-container">
+        <!--menü bölümü-->
+        <div class="gp-theprint-menu-wrap">
+            <!--Search mobile-->
+            @Html.Partial("~/Views/ThePrint/Search.cshtml")
+            <!--Search mobile-->
+            <!--İcons mobile-->
+            @Html.Partial("~/Views/ThePrint/Icons.cshtml")
+            <!--İcons mobile-->
+            <!--Mobile menu-->
+            @Html.Partial("~/Views/ThePrint/MobileMenu.cshtml")
+            <!--Mobile menu-->
+        </div>
+        <!--menü bölümü-->
+        <div class="gp-theprint-content-wrap-mobile">
+            <div class="gp-theprint-content-wrap">
+                <!--header alanı-->
+                <header id="header" class="gp-theprint-header" itemscope itemtype="http://schema.org/WPHeader">
+                    <!--Header-->
+                    @Html.Partial("~/Views/ThePrint/MegaMenu.cshtml")
+                    <!--Header-->
+                    <!--Reklam alanı alt menü-->
+                    <div class="gp-theprint-header-blocks">
+                        <!-- Üst Reklam Alanı-->
+
+                        @Html.Partial("~/Views/ThePrint/FullWithAdd.cshtml")
+                        <!-- Üst Reklam Alanı-->
+                        <!--Alt menü-->
+                        @Html.Partial("~/Views/ThePrint/SecondMenu.cshtml")
+                        <!--Alt menü-->
+                    </div>
+                    <!--Reklam alanı alt menü-->
+                </header>
+                <!--header alanı-->
+                <div class="gp-theprint-main">
+
+                    @RenderBody()
+                </div>
+                <!--footer alanı-->
+                @Html.Partial("~/Views/ThePrint/FooterArea.cshtml")
+                <!--footer alanı-->
+            </div>
+        </div>
+    </div>
+
+    <!--Scripts-->
+    @Html.Partial("~/Views/ThePrint/Scripts.cshtml")
+
+</body>
+
+</html>

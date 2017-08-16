@@ -1,0 +1,41 @@
+﻿<script type="text/javascript">
+        jQuery(document).ready(function ($) {
+            "use strict";
+
+            // Infinite scroll.
+            $('.gp-theprint-articles.front-posts').infinitescroll({
+                loading: {
+                    finished: undefined,
+                    finishedMsg: '<h5 class="ajax-loading-text">Sorry, no more posts.</h5></center>',
+                    img: 'data:image/gif;base64,R0lGODlhAQABAHAAACH5BAUAAAAALAAAAAABAAEAAAICRAEAOw==',
+                    msgText: '<h5 class="ajax-loading-text more">Loading more posts...</h5>',
+                    speed: 0,
+                    selector: ".gp-theprint-loading-text"
+                },
+                navSelector: ".gp-theprint-pagination",
+                nextSelector: ".gp-theprint-pagination a.next",
+                itemSelector: ".gp-theprint-articles.front-posts .front-post",
+                bufferPx: 0,
+                animate: false,
+            });
+            $(window).unbind('.infscr');
+            $("a#gp-theprint-infinite-trigger").click(function () {
+                $('.gp-theprint-articles.front-posts').infinitescroll('retrieve');
+                return false;
+            });
+
+        });// - Document ready.
+</script>
+<script type='text/javascript' src='~/Content/wp-content/plugins/contact-form-7/includes/js/jquery.form.min.js'></script>
+<script type='text/javascript'>
+        /* <![CDATA[ */
+        var _wpcf7 = { "loaderUrl": "http:\/\/www.grovepixels.com\/demo\/theprint\/~/wp-content\/plugins\/contact-form-7\/images\/ajax-loader.gif", "recaptchaEmpty": "Please verify that you are not a robot.", "sending": "Sending ...", "cached": "1" };
+        /* ]]> */
+</script>
+<script type='text/javascript' src='~/Content/wp-content/plugins/contact-form-7/includes/js/scripts.js'></script>
+<script type='text/javascript' src='~/Content/theprint.grovepixels1.netdna-cdn.com/demo/theprint/wp-content/themes/theprint/js/infinite-scroll.js'></script>
+<script type='text/javascript' src='~/Content/theprint.grovepixels1.netdna-cdn.com/demo/theprint/wp-content/themes/theprint/js/manual-trigger.js'></script>
+<script type='text/javascript' src='~/Content/theprint.grovepixels1.netdna-cdn.com/demo/theprint/wp-content/themes/theprint/js/plugins.js'></script>
+<script type='text/javascript' src='~/Content/theprint.grovepixels1.netdna-cdn.com/demo/theprint/wp-content/themes/theprint/js/custom.js'></script>
+<script type='text/javascript' src='~/Content/s0.wp.com/wp-content/js/devicepx-jetpack.js'></script>
+<script type='text/javascript' src='~/Content/theprint.grovepixels1.netdna-cdn.com/demo/theprint/wp-includes/js/wp-embed.min.js'></script>

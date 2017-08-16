@@ -1,0 +1,129 @@
+﻿@model HaberSis.Data.Model.MenuElemanlari
+@{
+    ViewBag.Title = "MenuElemanDuzenle";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <!-- Basic form -->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <header class="panel-heading">@ViewBag.Title</header>
+                <div class="panel-body">
+                    @*@using (Html.BeginForm("AnaMenuElemanEkle", "Menu", FormMethod.Post, new { id = "ElemanForm" }))
+                        {*@
+                    @*<input type="hidden" name="elemanId" value="@ViewBag.Eleman" />*@
+                    @Html.HiddenFor(x=>x.ID)
+
+
+                    @*<div class="form-group">
+                            <label for="exampleInputEmail1">Üst Kategori Adı</label>
+                            @Html.DropDownListFor(model => model.Kategori.KategoriAdi, new SelectList(ViewBag.Kategori, "ID", "KategoriAdi"), ("Seçiniz"), new { @class = "form-control", id = "ParentID" })
+                        </div>*@
+                    @*<div class="form-group">
+                            <label for="exampleInputEmail1">Haber Başlığı</label>
+                            <input type="text" class="form-control" id="haberBaslik" placeholder="Haber Başlığı">
+                        </div>*@
+
+
+                    <div class="form-group">
+                        <label for="Baslik">Eleman Adı</label>
+                        @Html.TextBoxFor(x => x.Baslik, new { @class = "form-control", id = "Ad", placeholder = "Label Adı" })
+                    </div>
+                    <div class="form-group">
+                        <label for="Baslik">Kategori</label>
+                        <select id="kategori" class="form-control">
+                            @foreach (var item in ViewBag.Kategoriler)
+                            {
+                                if (item.ID == Convert.ToInt32(Model.UrlKEY.Split('-')[1]))
+                                {
+                                    <option id="@item.ID" selected >@item.KategoriAdi</option>
+                                }
+                                else
+                                {
+                                    <option id="@item.ID">@item.KategoriAdi</option>
+                                }
+                            }
+                        </select>
+                        @*@Html.DropDownListFor(model => model.UrlKEY, new SelectList(ViewBag.Kategoriler, "ID", "KategoriAdi"), ("Seçiniz"), new { @class = "form-control", id = "kategori", name = "kategori" })*@
+                    </div>
+
+
+
+                    @*<div class="form-group">
+                            <label for="Baslik">Sabit Sayfalar</label>
+                            @Html.DropDownListFor(model => model.Baslik, new SelectList(ViewBag.Kategoriler, "ID", "KategoriAdi"), ("Seçiniz"), new { @class = "form-control", id = "ID" })
+                        </div>*@
+
+                    <div class="checkbox">
+                        <label>
+                            @Html.CheckBoxFor(x => x.AktifMi) Aktif Mi
+                        </label>
+                    </div>
+                    @*<a href="#" class="btn btn-default" onclick="HaberEkle()">Kaydet</a>*@
+                    <button @*type="submit"*@ class="btn btn-default" id="ElemanEkleBtn">Kaydet</button>
+                    @*}*@
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    $(document).ready(function () {
+        $(document).on("click", "#ElemanEkleBtn", function () {
+
+
+            var veritip;
+            if ($('#kategori').val() != "Seçiniz") {
+                veritip = "kategori";
+            }
+            //else if ($('#label').val() != "Seçiniz") {
+            //    //tip = "label";
+
+            //}
+            //else if ($('#sabit').val() != "Seçiniz") {
+
+            //}
+            var gonderilen = {};
+            gonderilen.Baslik = $("input[name = 'Baslik']").val();
+            //if (veritip == "kategori") {
+            gonderilen.UrlKEY = "kategori-" + $("#kategori option:selected").attr("id");
+            //}
+            gonderilen.elemanId = $("input[name = 'ID']").val();
+            gonderilen.AktifMi = $("[type=checkbox]").val();
+
+            $.ajax(
+        {
+            url: "/Menu/MenuElemanDuzenle",
+            contentType:"application/json;charset=utf-8",
+            data: JSON.stringify(gonderilen),
+            type: "POST",
+            dataType: "json",
+            success: function (response) {
+                //if (response.Success) {
+                //    bootbox.alert(response.Message, function () {
+                //        location.reload();
+                //    });
+                //    //bootboxjs
+                //}
+                //else {
+                //    bootbox.alert(response.Message, function () {
+                //        //geridöndüğünde bir şey yapılması istneiyorsa buraya yazılır
+                //    });
+                //}
+            },
+            error: function (er1, er2, er3) {
+                console.log(er3);
+            }
+
+
+        });
+        });
+
+    });
+</script>
+

@@ -1,0 +1,98 @@
+﻿@model HaberSis.Data.Model.Slider
+
+@{
+    ViewBag.Title = "Slider Düzenle";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="~/ckeditor/ckeditor.js"></script>
+
+<div class="container-fluid">
+    <!-- Basic form -->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <header class="panel-heading">@ViewBag.Title</header>
+                <div class="panel-body">
+                    @using (Html.BeginForm("Duzenle", "Slider", FormMethod.Post, new { enctype = "multipart/form-data", id = "SliderFormDuzenle" }))
+                    {
+
+
+
+                        <div class="form-group">
+                            <label for="Baslik">Slider Başlığı</label>
+                            @Html.TextBoxFor(x => x.Baslik, new { @class = "form-control", id = "Baslik", placeholder = "Slider Başlığı" })
+                        </div>
+
+                            <div class="form-group">
+                                <label for="Baslik">Slider Url</label>
+                                @Html.TextBoxFor(x => x.Url, new { @class = "form-control", id = "Url", placeholder = "Slider Url" })
+                            </div>
+                            <div class="form-group">
+                                <label for="KisaAciklama">Slider Açıklama</label>
+                                @*@Html.TextBoxFor(x => x.KisaAciklama, new { @class = "form-control", id = "KisaAciklama", placeholder = "Haber Kısa Açıklaması" })*@
+                                @Html.TextArea("Aciklama")
+                                <script type="text/javascript">
+                                    var editor = CKEDITOR.instances['Aciklama'];
+                                    if (editor) {
+                                        editor.destroy(true);
+
+                                    }
+                                    CKEDITOR.replace('Aciklama', { enterMode: CKEDITOR.ENTER_BR, });
+                                </script>
+                            </div>
+
+
+
+
+                            <div class="form-group">
+                                <label for="Aciklama">Resmi</label>
+
+                                <input type="file" name="ResimUrl" accept="image/*" class="form-control" />
+                            </div>
+
+
+
+
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" checked id="SliderAktif"> Aktif Mi
+                                </label>
+                            </div>
+                            @*<a href="#" class="btn btn-default" onclick="HaberEkle()">Kaydet</a>*@
+
+                            <button type="submit" class="btn btn-default" id="SliderDuzenle">Kaydet</button>
+
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<script>
+    $(document).ready(function ()
+    {
+        $(document).on("click", "#SliderDuzenle ", function ()
+        {
+            $("#SliderFormDuzenle").ajaxForm(
+                {
+                    success: function (response) {
+                        if (response.Success) {
+                            bootbox.alert(response.Message, function () {
+                                location.reload();
+                            });
+                        }
+                        else {
+                            bootbox.alert(response.Message, function () { });
+                        }
+                    }
+
+                })
+
+        })
+    })
+</script>
+

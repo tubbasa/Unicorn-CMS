@@ -1,0 +1,68 @@
+﻿@using HaberSis.Data.Model;
+@model HaberSis.Data.Model.Kategori
+@{
+    ViewBag.Title = "Duzenle";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    var KategoriList = (List<Kategori>)ViewBag.Workflow;
+    var parent = KategoriList.FirstOrDefault(k => k.ID == Model.ParentID);
+
+
+}
+
+<script src="~/ckeditor/ckeditor.js"></script>
+
+<div class="container-fluid">
+    <!-- Basic form -->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <header class="panel-heading">@ViewBag.Title</header>
+                <div class="panel-body">
+                    <form role="form" method="post" enctype="multipart/form-data" action="@Url.Action("Ekle","Haber")">
+                        @*<div class="form-group">
+                                <label for="exampleInputEmail1">Üst Kategori Adı</label>
+                                @Html.DropDownListFor(model => model.Kategori.KategoriAdi, new SelectList(ViewBag.Kategori, "ID", "KategoriAdi"), ("Seçiniz"), new { @class = "form-control", id = "ParentID" })
+                            </div>*@
+                        @*<div class="form-group">
+                                <label for="exampleInputEmail1">Haber Başlığı</label>
+                                <input type="text" class="form-control" id="haberBaslik" placeholder="Haber Başlığı">
+                            </div>*@
+
+                        <div class="form-group">
+                            <label for="Kategori">Kategori</label>
+                            @Html.DropDownListFor(x => Model.ID, new SelectList(ViewBag.Kategori, "ID", "KategoriAdi"), ("Seçiniz"), new { @class = "form-control", id = "KategoriID" })
+                        </div>
+                        <div class="form-group">
+                            <label for="Baslik">Kategori Başlığı</label>
+                            @Html.TextBoxFor(x => x.KategoriAdi, new { @class = "form-control", id = "Baslik", placeholder = "Kategori Başlığı" })
+                        </div>
+
+
+
+                        <div class="form-group">
+                            <label for="Aciklama">Url</label>
+
+                            @Html.TextBoxFor(x => x.Url)
+                        </div>
+
+
+
+
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" checked id="HaberAktif"> Aktif Mi
+                            </label>
+                        </div>
+                        @*<a href="#" class="btn btn-default" onclick="HaberEkle()">Kaydet</a>*@
+                        <input type="submit" />
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

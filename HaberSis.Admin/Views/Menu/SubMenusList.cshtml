@@ -1,0 +1,238 @@
+﻿@model PagedList.IPagedList<HaberSis.Data.Model.MenuElemanlari>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "MenuSubList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var menudetay = ViewBag.MenuDetails as HaberSis.Data.Model.Menu;
+    var parentdetay = ViewBag.ParentDetay as HaberSis.Data.Model.MenuElemanlari;
+
+
+}
+
+
+<div class="container-fluid">
+
+    <div class="row">
+        <!-- Responsive table -->
+        <div class="col-md-12">
+
+            <div class="panel panel-default">
+                <header class="panel-heading">@ViewBag.Title</header>
+                <div class="panel-body">
+                  
+
+                    @if (TempData["Bilgi"] != null)
+                    {
+                        <div class="alert alert-success">
+                            @TempData["Bilgi"]
+                        </div>
+                    }
+
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Başlık</th>
+                                    <th>Eklenme Tarihi</th>
+                                    <th>Menü Adı</th>
+                                    <th>Durum</th>
+                                    <th>İşlemler</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                @foreach (var item in Model)
+                                {
+
+                                    <tr>
+                                        <td><span class="label label-success">@item.ID</span></td>
+
+
+                                        <td>@item.Baslik</td>
+
+                                        <td>@item.EklenmeTarihi.ToString("MM.dd.yyyy")                                  </td>
+                                        <td>@parentdetay.Baslik - Menu: @menudetay.MenuAdi</td>
+
+                                        <td>
+                                            @if (item.AktifMi == true)
+                                            {
+                                                <b class="label label-success">Aktif</b>
+                                            }
+                                            else
+                                            {
+                                                <b class="label label-danger">Pasif</b>
+                                            }
+                                        </td>
+                                        @*<td><a href="#">@item.Kullanici.AdSoyad</a><label style="display:none" id="KullaniciId">@Session["KullaniciId"]</label></td>*@
+
+                                        <td>
+                                            <a class="btn btn-default btn-sm" href="@Url.Action("MenuElemanDuzenle","Menu",new { elemanID=item.ID})">Düzenle</a>
+                                            @*<button class="btn btn-default btn-sm">Sil</button>*@
+                                            @*<button class="btn btn-default btn-sm" id="KatSil" data-id="@item.ID">Si*@l@*@Html.ActionLink("Sil", "Sil", new { Id = item.ID }, new { onclick = "return confirm('Kaydı silmek istediğinize emin misiniz?')" })*@@*</button>*@
+
+                                            <a data-id="@item.ID" id="ElemanSil" class="btn btn-default btn-sm">Sil</a>
+                                            <a href="@Url.Action("MenuTipDurum","Menu",new { Id=item.ID,Durum=item.AktifMi})" class="btn btn-default btn-sm">
+                                                @if (item.AktifMi == true)
+                                                {
+                                                    <b class="label label-danger">Pasif Et</b>  }
+                                                else
+                                                {
+                                                    <b class="label label-success">Aktif Et</b>
+                                                }
+                                            </a>
+                                             @if (ViewBag.Third != true)
+                                             {        <a href="@Url.Action("SubMenusList","Menu",new { elemanID=item.ID})">Elemanları Listele</a>
+                                            <a href="@Url.Action("AnaMenuElemanEkle","Menu",new { elemanId=item.ID,MenuId=menudetay.ID})">Eleman Ekle</a>
+                                             }
+                                    
+                                        </td>
+                                    </tr>
+                                }
+
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+
+            @Html.PagedListPager(Model, Sayfa => Url.Action("Index", new { Sayfa }), PagedListRenderOptions.Classic)
+        </div>
+        <!-- /Responsive table -->
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+<script>
+ 
+    $(document).on("click", "#ElemanSil", function () {
+        var gelenslider = new Object();
+        gelenslider.elemanId = $(this).attr("data-id");
+        var siltr = $(this).closest("tr");
+        swal({
+            title: "Seçtiğiniz eleman alt menüleriyle beraber silinecek!",
+            text: "Silmek istediğinize emin misiniz",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DDD6855",
+            confirmButtonText: "Evet Sil",
+            closeOnConfirm:true
+
+        },
+        function (isConfirm)
+        {
+            if (isConfirm) {
+                $.ajax(
+                {
+                    url: '/Menu/ElemanSil',
+                    data: gelenslider,
+                    type: 'POST',
+                    dataType: 'json',
+                    success: function (response) {
+                        $.notify(response.Message, "success");
+                        console.log(siltr);
+                        siltr.fadeOut(300, function () { siltr.remove(); });
+
+
+
+
+                    },
+                    error: function () { }
+
+                });
+
+            }
+        });
+
+    });
+    //$(document).on("click", "#MenuLabelSil", function () {
+    //    var gelenmenutip = new Object();
+    //    gelenmenutip.ID = $(this).attr("data-id");
+    //    var siltr = $(this).closest("tr");
+    //    swal({
+    //        title: "Slider Silinecek!",
+    //        text: "Silmek istediğinize emin misiniz",
+    //        type: "warning",
+    //        showCancelButton: true,
+    //        confirmButtonColor: "#DDD6855",
+    //        confirmButtonText: "Evet Sil",
+    //        closeOnConfirm: true
+
+    //    },
+    //    function (isConfirm) {
+    //        if (isConfirm) {
+    //            $.ajax(
+    //            {
+    //                url: '/Menu/MenuLabelSil',
+    //                data: gelenmenutip,
+    //                type: 'POST',
+    //                dataType: 'json',
+    //                success: function (response) {
+    //                    $.notify(response.Message, "success");
+    //                    console.log(siltr);
+    //                    siltr.fadeOut(300, function () { siltr.remove(); });
+
+
+
+
+    //                },
+    //                error: function () { }
+
+    //            });
+
+    //        }
+    //    });
+
+    //});
+
+    //$(document).on("click", "#MenuLabelSil", function () {
+    //    var gelenmenutip = new Object();
+    //    gelenmenutip.ID = $(this).attr("data-id");
+    //    var siltr = $(this).closest("tr");
+    //    swal({
+    //        title: "Slider Silinecek!",
+    //        text: "Silmek istediğinize emin misiniz",
+    //        type: "warning",
+    //        showCancelButton: true,
+    //        confirmButtonColor: "#DDD6855",
+    //        confirmButtonText: "Evet Sil",
+    //        closeOnConfirm: true
+
+    //    },
+    //    function (isConfirm) {
+    //        if (isConfirm) {
+    //            $.ajax(
+    //            {
+    //                url: '/Menu/MenuLabelSil',
+    //                data: gelenmenutip,
+    //                type: 'POST',
+    //                dataType: 'json',
+    //                success: function (response) {
+    //                    $.notify(response.Message, "success");
+    //                    console.log(siltr);
+    //                    siltr.fadeOut(300, function () { siltr.remove(); });
+
+
+
+
+    //                },
+    //                error: function () { }
+
+    //            });
+
+    //        }
+    //    });
+
+    //});
+</script>
+
+

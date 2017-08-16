@@ -1,0 +1,148 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>@ViewBag.Title</title>
+    <!-- Fonts -->
+   
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800,400italic%7cMontserrat:400,700" rel="stylesheet" type="text/css">
+    <!-- Icons -->
+    <link href="~/Content/typicons.min.css" rel="stylesheet">
+    <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
+    <!-- iCheck - Custom radio/check input -->
+    <link href="~/Content/icheck/minimal.css" rel="stylesheet">
+    <!-- Bootstrap -->
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet">
+    <!-- Footable plugin -->
+    <link href="~/Content/plugins.min.css" rel="stylesheet">
+    <!-- Template -->
+    <link href="~/Content/main.css" rel="stylesheet">
+    <!--Bootstrap etiket-->
+    <link href="~/Content/bootstrap-tagsinput.css" rel="stylesheet" />
+    <script src="~/Scripts/plugins/jquery.min.js"></script>
+    <!--Sweet alert-->
+    <link href="~/Content/sweetalert.css" rel="stylesheet" />
+    <!--[if lt IE 9]>
+      <script src="js/plugins/shiv.min.js"></script>
+      <script src="js/plugins/respond.min.js"></script>
+      <script src="js/plugins/excanvas.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+
+    <!-- Page container -->
+    <div class="page-container">
+        <!-- Sidebar -->
+        @Html.Partial("_Sidebar")
+        <!-- /Sidebar -->
+        <!-- Content -->
+        <div id="content">
+            <!-- Header -->
+         @Html.Partial("_Header")
+            <!-- /Header -->
+            <!-- Content start -->
+            @RenderBody()
+        </div>
+        <!-- /Content -->
+    </div>
+    <!-- /Page container -->
+    <!-- PLUGINS ALL -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Eklenecek Menüyü Seçiniz</h4>
+                </div>
+                <div class="modal-body">
+                    <select id="liste" name="liste" class="form-control">
+                       
+                    </select>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="save">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="~/Scripts/plugins/modernizr.min.js"></script>
+    <!-- Bootstrap core -->
+    <script src="~/Scripts/plugins/bootstrap.min.js"></script>
+    <!-- Custom scrollbar -->
+    <script src="~/Scripts/plugins/enscroll.min.js"></script>
+    <!-- Dynamic tables -->
+    <script src="~/Scripts/plugins/footable.min.js"></script>
+    <!-- Knob / Donut charts -->
+    <script src="~/Scripts/plugins/knob.min.js"></script>
+    <!-- Rickshaw graphs & charts -->
+    <script src="~/Scripts/plugins/sparkline.min.js"></script>
+    <script src="~/Scripts/plugins/rickshaw/d3.v3.js"></script>
+    <script src="~/Scripts/plugins/rickshaw/rickshaw.min.js"></script>
+    <!-- Flot -->
+    <script src="~/Scripts/plugins/flot.min.js"></script>
+    <!-- Custom checkboxes and radio input -->
+    <script src="~/Scripts/plugins/icheck.min.js"></script>
+    <script src="~/Scripts/bootstrap-tagsinput.js"></script>
+    <!-- Page specific -->
+   
+    <!-- Site -->
+    <script src="~/Scripts/main.js"></script>
+    <script src="~/Scripts/bootbox.min.js"></script>
+    <script src="~/Scripts/Global.js"></script>
+    <script src="~/Scripts/notify.js"></script>
+    <script src="~/Scripts/jquery.form.js"></script>
+    <script src="~/Scripts/sweetalert.min.js"></script>
+    <script>
+        $('#bok').click(function () {
+            $.ajax(
+      {
+          url: "/Menu/MenuListe",
+          data: null,
+          type: "POST",
+          dataType: "json",
+          success: function (response) {
+              console.log(response);
+              var list = [];
+              var gelentolist = response.split('|');
+              for (var i = 0; i < gelentolist.length-1; i++)
+              {
+                  var bilgiler=gelentolist[i].split('-');
+                  var ad=bilgiler[0].split(':');
+                  var ID= bilgiler[1].split(':');
+
+                  $('#liste').append($('<option/>', { 
+                      value: ID[1],
+                      text : ad[1] 
+                  }));
+                  $('#myModal').modal('show')
+                 
+                  $('#save').click(function ()
+                  {
+                      var secilen = $("select[name='liste'] option:selected").val();
+                      location.href="/Menu/MenuRedirect/"+secilen;
+                  });
+
+
+              }
+
+          },
+          error: function (er1, er2, er3) {
+              console.log(er3);
+          }
+
+
+      });
+        });
+
+
+        //    
+
+    </script>
+</body>
+</html>
